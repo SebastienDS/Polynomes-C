@@ -13,5 +13,6 @@ Rationnel inputRationnelFrac();
 int pgcd(int a, int b);
 void simplify(Rationnel *r);
 Rationnel sumRationnel(Rationnel r1, Rationnel r2);
+Rationnel productRationnel(Rationnel r1, Rationnel r2);
 
 #endif

@@ -9,13 +9,14 @@ int main()
     // Rationnel r2 = {4, 5};
     // Rationnel poly[] = {r1, r2};
     // Polynome p = initPolynome(1, poly);
-    // destroyPolynome(&p);
 
     Polynome p1 = inputPolynome();
     Polynome p2 = inputPolynome();
 
-    printPolynome(sumPolynome(p1, p2));
+    Polynome p = sumPolynome(p1, p2);
+    printPolynome(p);
 
+    destroyPolynome(&p);
     destroyPolynome(&p1);
     destroyPolynome(&p2);
     return 0;

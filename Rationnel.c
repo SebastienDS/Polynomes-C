@@ -68,3 +68,13 @@ Rationnel sumRationnel(Rationnel r1, Rationnel r2)
     simplify(&r);
     return r;
 }
+
+Rationnel productRationnel(Rationnel r1, Rationnel r2)
+{
+    Rationnel r;
+    r.num = r1.num * r2.num;
+    r.den = r1.den * r2.den;
+
+    simplify(&r);
+    return r;
+}
