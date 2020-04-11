@@ -10,5 +10,8 @@ typedef struct
 void printRationnelFrac(Rationnel r);
 void printRationnel(Rationnel r);
 Rationnel inputRationnelFrac();
+int pgcd(int a, int b);
+void simplify(Rationnel* r);
+Rationnel sumRationnel(Rationnel r1, Rationnel r2);
 
 #endif

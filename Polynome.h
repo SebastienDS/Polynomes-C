@@ -13,5 +13,6 @@ void printPolynome(Polynome polynome);
 Polynome initPolynome(int degre, Rationnel *poly);
 void destroyPolynome(Polynome *polynome);
 Polynome inputPolynome();
+Polynome sumPolynome(Polynome p1, Polynome p2);
 
 #endif

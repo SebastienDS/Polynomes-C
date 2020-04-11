@@ -63,3 +63,23 @@ Polynome inputPolynome()
     printf("\n");
     return p;
 }
+
+Polynome sumPolynome(Polynome p1, Polynome p2)
+{
+    int max = (p1.degre > p2.degre) ? p1.degre : p2.degre;
+    Rationnel poly[max+1];
+    for (int i = 0; i < max + 1; i++)
+    {
+        Rationnel sum = {0, 1};
+        if (p1.degre >= i)
+        {
+            sum = sumRationnel(sum, p1.poly[i]);
+        }
+        if (p2.degre >= i)
+        {
+            sum = sumRationnel(sum, p2.poly[i]);
+        }
+        poly[i] = sum;
+    }
+    return initPolynome(max, poly);
+}
