@@ -5,7 +5,7 @@
 void printPolynome(Polynome p)
 {
     int x = p.degre;
-    for (int i = 0; i < p.degre + 1; i++)
+    for (int i = p.degre; i > -1; i--)
     {
         printRationnelFrac(p.poly[i]);
         if (x == 1)
@@ -52,7 +52,7 @@ Polynome inputPolynome()
     Rationnel poly[degre + 1];
 
     printf("Entrer les %d coefficients de votre polynome (fraction): \n", degre + 1);
-    for (int i = 0; i < degre + 1; i++)
+    for (int i = degre; i > -1; i--)
     {
         poly[i] = inputRationnelFrac();
     }
@@ -67,7 +67,7 @@ Polynome inputPolynome()
 Polynome sumPolynome(Polynome p1, Polynome p2)
 {
     int max = (p1.degre > p2.degre) ? p1.degre : p2.degre;
-    Rationnel poly[max+1];
+    Rationnel poly[max + 1];
     for (int i = 0; i < max + 1; i++)
     {
         Rationnel sum = {0, 1};

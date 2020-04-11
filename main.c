@@ -11,9 +11,9 @@ int main()
     // Polynome p = initPolynome(1, poly);
     // destroyPolynome(&p);
 
-
     Polynome p1 = inputPolynome();
     Polynome p2 = inputPolynome();
+
     printPolynome(sumPolynome(p1, p2));
 
     destroyPolynome(&p1);

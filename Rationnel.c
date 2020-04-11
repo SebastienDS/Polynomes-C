@@ -41,7 +41,7 @@ int pgcd(int a, int b)
     }
 }
 
-void simplify(Rationnel* r)
+void simplify(Rationnel *r)
 {
     int pgcd_ = pgcd(r->num, r->den);
     r->num /= pgcd_;
