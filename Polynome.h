@@ -3,16 +3,15 @@
 
 #include "Rationnel.h"
 
-
-typedef struct {
+typedef struct
+{
     int degre;
-    Rationnel* poly;
+    Rationnel *poly;
 } Polynome;
 
-
 void printPolynome(Polynome polynome);
-Polynome initPolynome(int degre, Rationnel* poly);
-void destroyPolynome(Polynome* polynome);
-
+Polynome initPolynome(int degre, Rationnel *poly);
+void destroyPolynome(Polynome *polynome);
+Polynome inputPolynome();
 
 #endif
