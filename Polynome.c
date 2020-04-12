@@ -146,3 +146,18 @@ Rationnel evalPolynome(Polynome p, Rationnel x)
     }
     return ret;
 }
+
+int derivedPolynome(Polynome p, Polynome *ret)
+{
+    if (_initPolynome(p.degre - 1, ret))
+    {
+        return FAIL_MALLOC;
+    }
+
+    for (int i = 0; i < p.degre; i++)
+    {
+        Rationnel r = {i + 1, 1};
+        ret->poly[i] = productRationnel(r, p.poly[i + 1]);
+    }
+    return OK;
+}

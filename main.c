@@ -10,6 +10,7 @@ int main()
     Polynome p2;
     Polynome sum;
     Polynome product;
+    Polynome derived;
 
     if (inputPolynome(&p1))
     {
@@ -50,8 +51,18 @@ int main()
     printRationnelFrac(y);
     printf("\n");
 
+    if (derivedPolynome(p1, &derived)) 
+    {
+        goto free_product;
+    }
+    printf("f'(x) = ");
+    printPolynome(derived);
+    printf("\n");
+
     ret_value = EXIT_SUCCESS;
 
+free_derived:
+    destroyPolynome(&derived);
 free_product:
     destroyPolynome(&product);
 free_sum:
