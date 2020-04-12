@@ -10,9 +10,9 @@ typedef struct
 } Polynome;
 
 void printPolynome(Polynome polynome);
-Polynome initPolynome(int degre, Rationnel *poly);
+int initPolynome(int degre, Rationnel *poly, Polynome *ret);
 void destroyPolynome(Polynome *polynome);
-Polynome inputPolynome();
-Polynome sumPolynome(Polynome p1, Polynome p2);
+int inputPolynome(Polynome *ret);
+int sumPolynome(Polynome p1, Polynome p2, Polynome *ret);
 
 #endif

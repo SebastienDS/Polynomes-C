@@ -20,34 +20,42 @@ void printPolynome(Polynome p)
     }
 }
 
-Polynome initPolynome(int degre, Rationnel *poly)
+int initPolynome(int degre, Rationnel *poly, Polynome *ret)
 {
     Polynome p = {degre, malloc(degre * sizeof(Rationnel))};
+    if (p.poly == NULL)
+    {
+        printf("L'allocation a echoué");
+        return 1;
+    }
     for (int i = 0; i < degre + 1; i++)
     {
         p.poly[i] = poly[i];
     }
-    return p;
+    *ret = p;
+    return 0;
 }
 
 void destroyPolynome(Polynome *p)
 {
     free(p->poly);
+    p->poly = NULL;
 }
 
-Polynome inputPolynome()
+int inputPolynome(Polynome *ret)
 {
+    // return: 0: good, 1: fail malloc, 2: fail input degre
     int degre;
     printf("Entrer le degre de votre polynome : ");
     if (scanf("%d", &degre) != 1)
     {
         printf("Vous n'avez pas saisi d'entier\n");
-        exit(EXIT_FAILURE);
+        return 2;
     }
     if (degre <= 0)
     {
         printf("Vous n'avez pas saisi de degre valide\n");
-        exit(EXIT_FAILURE);
+        return 2;
     }
     Rationnel poly[degre + 1];
 
@@ -57,14 +65,17 @@ Polynome inputPolynome()
         poly[i] = inputRationnelFrac();
     }
 
-    Polynome p = initPolynome(degre, poly);
+    if (initPolynome(degre, poly, ret))
+    {
+        return 1;
+    }
     printf("Vous avez saisi le polynome : ");
-    printPolynome(p);
+    printPolynome(*ret);
     printf("\n");
-    return p;
+    return 0;
 }
 
-Polynome sumPolynome(Polynome p1, Polynome p2)
+int sumPolynome(Polynome p1, Polynome p2, Polynome *ret)
 {
     int max = (p1.degre > p2.degre) ? p1.degre : p2.degre;
     Rationnel poly[max + 1];
@@ -81,5 +92,9 @@ Polynome sumPolynome(Polynome p1, Polynome p2)
         }
         poly[i] = sum;
     }
-    return initPolynome(max, poly);
+    if (initPolynome(max, poly, ret))
+    {
+        return 1;
+    }
+    return 0;
 }

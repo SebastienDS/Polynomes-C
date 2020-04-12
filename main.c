@@ -5,19 +5,32 @@
 
 int main()
 {
-    // Rationnel r1 = {4, 2};
-    // Rationnel r2 = {4, 5};
-    // Rationnel poly[] = {r1, r2};
-    // Polynome p = initPolynome(1, poly);
+    int ret_value = EXIT_FAILURE;
+    Polynome p1;
+    Polynome p2;
+    Polynome sum;
 
-    Polynome p1 = inputPolynome();
-    Polynome p2 = inputPolynome();
+    if (inputPolynome(&p1))
+    {
+        goto end;
+    }
+    if (inputPolynome(&p2))
+    {
+        goto free_p1;
+    }
+    if (sumPolynome(p1, p2, &sum))
+    {
+        goto free_p2;
+    }
+    printPolynome(sum);
 
-    Polynome p = sumPolynome(p1, p2);
-    printPolynome(p);
+    ret_value = EXIT_SUCCESS;
 
-    destroyPolynome(&p);
-    destroyPolynome(&p1);
+    destroyPolynome(&sum);
+free_p2:
     destroyPolynome(&p2);
-    return 0;
+free_p1:
+    destroyPolynome(&p1);
+end:
+    return ret_value;
 }
