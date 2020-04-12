@@ -20,7 +20,7 @@ void printPolynome(Polynome p)
     }
 }
 
-int initPolynome(int degre, Rationnel *poly, Polynome *ret)
+int _initPolynome(int degre, Polynome* ret) 
 {
     Polynome p = {degre, malloc(degre * sizeof(Rationnel))};
     if (p.poly == NULL)
@@ -28,11 +28,20 @@ int initPolynome(int degre, Rationnel *poly, Polynome *ret)
         printf("L'allocation a echoué");
         return 1;
     }
+    *ret = p;
+    return 0;
+}
+
+int initPolynome(int degre, Rationnel *poly, Polynome *ret)
+{
+    if (_initPolynome(degre, ret)) 
+    {
+        return 1;
+    }
     for (int i = 0; i < degre + 1; i++)
     {
-        p.poly[i] = poly[i];
+        ret->poly[i] = poly[i];
     }
-    *ret = p;
     return 0;
 }
 
@@ -95,6 +104,24 @@ int sumPolynome(Polynome p1, Polynome p2, Polynome *ret)
     if (initPolynome(max, poly, ret))
     {
         return 1;
+    }
+    return 0;
+}
+
+int productPolynome(Polynome p1, Polynome p2, Polynome* ret) 
+{
+    int max = (p1.degre > p2.degre) ? p1.degre : p2.degre;
+    if (_initPolynome(max, ret)) 
+    {
+        return 1;
+    }
+
+    for (int i_p1 = 0; i_p1 < p1.degre + 1; i_p1++)
+    {
+        for (int i_p2 = 0; i_p2 < p2.degre + 1; i_p2++)
+        {
+            ret->poly[i_p1 + i_p2] = sumRationnel(ret->poly[i_p1 + i_p2], productRationnel(p1.poly[i_p1], p1.poly[i_p1]));
+        } 
     }
     return 0;
 }
