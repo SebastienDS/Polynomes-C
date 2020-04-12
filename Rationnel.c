@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Rationnel.h"
+#include "code.h"
 
 void printRationnelFrac(Rationnel r)
 {
@@ -16,16 +17,17 @@ void printRationnel(Rationnel r)
     printf("%.2f", (float)r.num / r.den);
 }
 
-Rationnel inputRationnelFrac()
+int inputRationnelFrac(Rationnel *ret)
 {
     int num, den;
     if (scanf("%d/%d", &num, &den) != 2 || den == 0)
     {
         printf("Vous n'avez pas saisi de fraction valide\n");
-        exit(EXIT_FAILURE);
+        return FAIL_INPUT;
     }
     Rationnel r = {num, den};
-    return r;
+    *ret = r;
+    return OK;
 }
 
 int pgcd(int a, int b)
@@ -77,4 +79,14 @@ Rationnel productRationnel(Rationnel r1, Rationnel r2)
 
     simplify(&r);
     return r;
+}
+
+Rationnel powRationnel(Rationnel x, int power)
+{
+    Rationnel ret = {1, 1};
+    for (int i = 0; i < power; i++)
+    {
+        ret = productRationnel(ret, x);
+    }
+    return ret;
 }

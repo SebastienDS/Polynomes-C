@@ -9,10 +9,11 @@ typedef struct
 
 void printRationnelFrac(Rationnel r);
 void printRationnel(Rationnel r);
-Rationnel inputRationnelFrac();
+int inputRationnelFrac(Rationnel *ret);
 int pgcd(int a, int b);
 void simplify(Rationnel *r);
 Rationnel sumRationnel(Rationnel r1, Rationnel r2);
 Rationnel productRationnel(Rationnel r1, Rationnel r2);
+Rationnel powRationnel(Rationnel x, int power);
 
 #endif

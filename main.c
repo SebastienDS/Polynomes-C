@@ -35,6 +35,21 @@ int main()
     printPolynome(product);
     printf("\n");
 
+    Rationnel x;
+    printf("f(x) = ");
+    printPolynome(p1);
+    printf("\nx = ");
+    if (inputRationnelFrac(&x))
+    {
+        goto free_product;
+    }
+    Rationnel y = evalPolynome(p1, x);
+    printf("f(");
+    printRationnelFrac(x);
+    printf(") = ");
+    printRationnelFrac(y);
+    printf("\n");
+
     ret_value = EXIT_SUCCESS;
 
 free_product:
