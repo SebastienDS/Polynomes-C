@@ -31,6 +31,7 @@ int inputRationnelFrac(Rationnel *ret)
         return FAIL;
     }
     *ret = r;
+    simplify(ret);
     return OK;
 }
 

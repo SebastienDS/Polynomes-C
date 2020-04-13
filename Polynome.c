@@ -115,6 +115,7 @@ int inputPolynome(Polynome *ret)
 
     Rationnel poly[degre + 1];
 
+    printf("Entrer le polynome avec des fractions valides : \nf(x) = ");
     for (int i = degre; i > -1; i--)
     {
         Rationnel r;
@@ -141,6 +142,7 @@ int inputPolynome(Polynome *ret)
         {
             return FAIL;
         }
+        simplify(&r);
         poly[i] = r;
     }
 
