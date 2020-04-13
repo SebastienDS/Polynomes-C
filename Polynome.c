@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "Polynome.h"
 #include "code.h"
 
@@ -57,20 +58,30 @@ void destroyPolynome(Polynome *p)
     p->poly = NULL;
 }
 
-int inputPolynome(Polynome *ret)
+int inputDegre(int *degre)
 {
-    int degre;
     printf("Entrer le degre de votre polynome : ");
-    if (scanf("%d", &degre) != 1)
+    if (scanf("%d", degre) != 1)
     {
         printf("Vous n'avez pas saisi d'entier\n");
         return FAIL_INPUT;
     }
-    if (degre <= 0)
+    if (*degre <= 0)
     {
         printf("Vous n'avez pas saisi de degre valide\n");
-        return FAIL_INPUT;
+        return FAIL;
     }
+    return OK;
+}
+
+int inputPolynome1By1(Polynome *ret)
+{
+    int degre;
+    if (inputDegre(&degre))
+    {
+        return FAIL;
+    }
+
     Rationnel poly[degre + 1];
 
     printf("Entrer les %d coefficients de votre polynome (fraction): \n", degre + 1);
@@ -82,6 +93,55 @@ int inputPolynome(Polynome *ret)
             return FAIL_INPUT;
         }
         poly[i] = ret;
+    }
+
+    if (initPolynome(degre, poly, ret))
+    {
+        return FAIL_MALLOC;
+    }
+    printf("Vous avez saisi le polynome : ");
+    printPolynome(*ret);
+    printf("\n");
+    return OK;
+}
+
+int inputPolynome(Polynome *ret)
+{
+    int degre;
+    if (inputDegre(&degre))
+    {
+        return FAIL;
+    }
+
+    Rationnel poly[degre + 1];
+
+    for (int i = degre; i > -1; i--)
+    {
+        Rationnel r;
+        char* str = "%d/%d";
+        char dest[10];
+
+        strcpy(dest, str);
+        if (i > 1)
+        {
+            strcat(dest, "x^");
+            dest[7] = i + '0';
+            dest[8] = '\0';
+        }
+        else if (i == 1) {
+            strcat(dest, "x");
+        }
+        
+        if (scanf(dest, &r.num, &r.den) != 2) 
+        {
+            printf("Vous n'avez pas saisi de fraction valide\n");   
+            return FAIL_INPUT;
+        }
+        if (!isRationnelValid(r))
+        {
+            return FAIL;
+        }
+        poly[i] = r;
     }
 
     if (initPolynome(degre, poly, ret))
