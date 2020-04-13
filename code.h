@@ -2,7 +2,8 @@
 #define CODE_H
 
 #define OK 0
-#define FAIL_MALLOC 1
-#define FAIL_INPUT 2
+#define FAIL 1
+#define FAIL_MALLOC 2
+#define FAIL_INPUT 3
 
 #endif

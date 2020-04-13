@@ -20,14 +20,24 @@ void printRationnel(Rationnel r)
 int inputRationnelFrac(Rationnel *ret)
 {
     int num, den;
-    if (scanf("%d/%d", &num, &den) != 2 || den == 0)
+    if (scanf("%d/%d", &num, &den) != 2)
     {
         printf("Vous n'avez pas saisi de fraction valide\n");
         return FAIL_INPUT;
     }
     Rationnel r = {num, den};
+    if (!isRationnelValid(r))
+    {
+        return FAIL;
+    }
     *ret = r;
+    simplify(ret);
     return OK;
+}
+
+int isRationnelValid(Rationnel r)
+{
+    return r.den != 0;
 }
 
 int pgcd(int a, int b)
