@@ -35,8 +35,7 @@ int _initPolynome(int degre, Polynome *ret)
     }
     for (int i = 0; i < degre + 1; i++)
     {
-        Rationnel r = {0, 1};
-        p.poly[i] = r;
+        p.poly[i] = (Rationnel){0, 1};
     }
     *ret = p;
     return OK;
@@ -221,8 +220,7 @@ int derivedPolynome(Polynome p, Polynome *ret)
 
     for (int i = 0; i < p.degre; i++)
     {
-        Rationnel r = {i + 1, 1};
-        ret->poly[i] = productRationnel(r, p.poly[i + 1]);
+        ret->poly[i] = productRationnel((Rationnel){i + 1, 1}, p.poly[i + 1]);
     }
     return OK;
 }
@@ -236,8 +234,21 @@ int primitivePolynome(Polynome p, Polynome *ret)
 
     for (int i = p.degre; i > -1; i--)
     {
-        Rationnel r = {1, i + 1};
-        ret->poly[i + 1] = productRationnel(p.poly[i], r);
+        ret->poly[i + 1] = productRationnel(p.poly[i], (Rationnel){1, i + 1});
     }
     return OK;
+}
+
+Rationnel integralPolynome(Polynome p, Rationnel a, Rationnel b)
+{
+    Polynome primitive;
+    if (primitivePolynome(p, &primitive))
+    {
+        return (Rationnel){0, 1}; 
+    }
+
+    Rationnel result = sumRationnel(evalPolynome(primitive, b), productRationnel(evalPolynome(primitive, a), (Rationnel){-1, 1}));
+
+    destroyPolynome(&primitive);
+    return result;
 }

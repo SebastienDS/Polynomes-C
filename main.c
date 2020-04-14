@@ -70,6 +70,26 @@ int main()
     printf("\n");
 
 
+    Rationnel a, b;
+    printf("Integral pour f(x) = ");
+    printPolynome(p1);
+    printf("\na : ");
+    if (inputRationnelFrac(&a))
+    {
+        goto free_primitive;
+    }
+    printf("b : ");
+    if (inputRationnelFrac(&b))
+    {
+        goto free_primitive;
+    }
+
+    Rationnel integral = integralPolynome(p1, a, b);
+    printf("Integrale : ");
+    printRationnelFrac(integral);
+    printf("\n");
+
+
     ret_value = EXIT_SUCCESS;
 
 free_primitive:

@@ -21,5 +21,7 @@ int productPolynome(Polynome p1, Polynome p2, Polynome *ret);
 Rationnel evalPolynome(Polynome p, Rationnel x);
 int derivedPolynome(Polynome p, Polynome *ret);
 int primitivePolynome(Polynome p, Polynome *ret);
+Rationnel integralPolynome(Polynome p, Rationnel a, Rationnel b);
+
 
 #endif
