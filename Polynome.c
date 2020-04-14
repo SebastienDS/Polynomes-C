@@ -9,14 +9,17 @@ void printPolynome(Polynome p)
     int x = p.degre;
     for (int i = p.degre; i > -1; i--)
     {
-        printRationnelFrac(p.poly[i]);
-        if (x == 1)
+        if (p.poly[i].num != 0)
         {
-            printf("x");
-        }
-        else if (x > 0)
-        {
-            printf("x^%d", x);
+            printRationnelFrac(p.poly[i]);
+            if (x == 1)
+            {
+                printf("x");
+            }
+            else if (x > 0)
+            {
+                printf("x^%d", x);
+            }
         }
         x--;
     }
@@ -220,6 +223,21 @@ int derivedPolynome(Polynome p, Polynome *ret)
     {
         Rationnel r = {i + 1, 1};
         ret->poly[i] = productRationnel(r, p.poly[i + 1]);
+    }
+    return OK;
+}
+
+int primitivePolynome(Polynome p, Polynome *ret)
+{
+    if (_initPolynome(p.degre + 1, ret))
+    {
+        return FAIL_MALLOC;
+    }
+
+    for (int i = p.degre; i > -1; i--)
+    {
+        Rationnel r = {1, i + 1};
+        ret->poly[i + 1] = productRationnel(p.poly[i], r);
     }
     return OK;
 }

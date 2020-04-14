@@ -11,8 +11,10 @@ int main()
     Polynome sum;
     Polynome product;
     Polynome derived;
+    Polynome primitive;
 
-    if (inputPolynome(&p1))
+    // Exemple de saisie de polynome : 1/1x^6+0/1x^5+0/1x^4+0/1x^3+0/1x^2+1/1x+1/1
+    if (inputPolynome(&p1)) 
     {
         goto end;
     }
@@ -59,8 +61,19 @@ int main()
     printPolynome(derived);
     printf("\n");
 
+    if (primitivePolynome(p1, &primitive)) 
+    {
+        goto free_derived;
+    }
+    printf("F(x) = ");
+    printPolynome(primitive);
+    printf("\n");
+
+
     ret_value = EXIT_SUCCESS;
 
+free_primitive:
+    destroyPolynome(&primitive);
 free_derived:
     destroyPolynome(&derived);
 free_product:
