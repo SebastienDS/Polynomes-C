@@ -12,6 +12,7 @@ int main()
     Polynome product;
     Polynome derived;
     Polynome primitive;
+    Polynome elevatedPolynome;
 
     // Exemple de saisie de polynome : 1/1x^6+0/1x^5+0/1x^4+0/1x^3+0/1x^2+1/1x+1/1
     if (inputPolynome(&p1)) 
@@ -26,9 +27,10 @@ int main()
     {
         goto free_p2;
     }
-    printf("somme: ");
+    printf("\nsomme: ");
     printPolynome(sum);
-    printf("\n");
+    printf("\n\n");
+
 
     if (productPolynome(p1, p2, &product))
     {
@@ -36,12 +38,13 @@ int main()
     }
     printf("produit: ");
     printPolynome(product);
-    printf("\n");
+    printf("\n\n");
+
 
     Rationnel x;
     printf("f(x) = ");
     printPolynome(p1);
-    printf("\nx = ");
+    printf("\nx (fraction) = ");
     if (inputRationnelFrac(&x))
     {
         goto free_product;
@@ -51,7 +54,8 @@ int main()
     printRationnelFrac(x);
     printf(") = ");
     printRationnelFrac(y);
-    printf("\n");
+    printf("\n\n");
+
 
     if (derivedPolynome(p1, &derived)) 
     {
@@ -59,7 +63,7 @@ int main()
     }
     printf("f'(x) = ");
     printPolynome(derived);
-    printf("\n");
+    printf("\n\n");
 
     if (primitivePolynome(p1, &primitive)) 
     {
@@ -67,18 +71,18 @@ int main()
     }
     printf("F(x) = ");
     printPolynome(primitive);
-    printf("\n");
+    printf("\n\n");
 
 
     Rationnel a, b;
     printf("Integral pour f(x) = ");
     printPolynome(p1);
-    printf("\na : ");
+    printf("\na (fraction) = ");
     if (inputRationnelFrac(&a))
     {
         goto free_primitive;
     }
-    printf("b : ");
+    printf("b (fraction) = ");
     if (inputRationnelFrac(&b))
     {
         goto free_primitive;
@@ -87,11 +91,30 @@ int main()
     Rationnel integral = integralPolynome(p1, a, b);
     printf("Integrale : ");
     printRationnelFrac(integral);
-    printf("\n");
+    printf("\n\n");
 
+    int n;
+    printf("Elevation du polynome: ");
+    printPolynome(p1);
+    printf(" a la puissance: ");
+
+    if (scanf("%d", &n) != 1) {
+        goto free_primitive;
+    }
+
+    if (elevationPowerN(p1, n, &elevatedPolynome))
+    {
+        goto free_primitive;
+    }
+
+    printf("Polynome apres elevation: ");
+    printPolynome(elevatedPolynome);
+    printf("\n\n");
 
     ret_value = EXIT_SUCCESS;
 
+free_elevatedPolynome:
+    destroyPolynome(&elevatedPolynome);
 free_primitive:
     destroyPolynome(&primitive);
 free_derived:

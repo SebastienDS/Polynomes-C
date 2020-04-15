@@ -252,3 +252,28 @@ Rationnel integralPolynome(Polynome p, Rationnel a, Rationnel b)
     destroyPolynome(&primitive);
     return result;
 }
+
+int elevationPowerN(Polynome p, int elevationDegre, Polynome *ret)
+{
+    if (elevationDegre <= 0)
+    {
+        return FAIL;
+    }
+
+    Polynome passingPolynome;
+    if (_initPolynome(elevationDegre, &passingPolynome))
+    {
+        return FAIL;
+    }
+    passingPolynome.poly[passingPolynome.degre] = (Rationnel){1, 1};
+
+    int return_value = OK;
+
+    if (productPolynome(p, passingPolynome, ret))
+    {
+        return_value = FAIL;
+    }
+
+    destroyPolynome(&passingPolynome);
+    return return_value;
+}

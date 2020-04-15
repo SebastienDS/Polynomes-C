@@ -22,6 +22,6 @@ Rationnel evalPolynome(Polynome p, Rationnel x);
 int derivedPolynome(Polynome p, Polynome *ret);
 int primitivePolynome(Polynome p, Polynome *ret);
 Rationnel integralPolynome(Polynome p, Rationnel a, Rationnel b);
-
+int elevationPowerN(Polynome p, int elevationDegre, Polynome *ret);
 
 #endif
