@@ -7,10 +7,12 @@
 void printPolynome(Polynome p)
 {
     int x = p.degre;
+    int zero = 1; // check if the polynome is not only 0
     for (int i = p.degre; i > -1; i--)
     {
         if (p.poly[i].num != 0)
         {
+            zero = 0;
             printRationnelFrac(p.poly[i]);
             if (x == 1)
             {
@@ -22,6 +24,10 @@ void printPolynome(Polynome p)
             }
         }
         x--;
+    }
+    if (zero) 
+    {
+        printf("0");
     }
 }
 
