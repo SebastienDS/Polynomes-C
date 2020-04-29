@@ -74,7 +74,7 @@ int inputDegre(int *degre)
         printf("Vous n'avez pas saisi d'entier\n");
         return FAIL_INPUT;
     }
-    if (*degre <= 0)
+    if (*degre < 0)
     {
         printf("Vous n'avez pas saisi de degre valide\n");
         return FAIL;
