@@ -162,6 +162,11 @@ int main()
             break;
         }
 
+        if (input == 0)
+        {
+            ret_value = END;
+            break;
+        }
         // Exemple de saisie de polynome degre 6: 1/1x^6+0/1x^5+0/1x^4+0/1x^3+0/1x^2+1/1x+1/1
         if (inputPolynome(&p1)) 
         {
@@ -179,9 +184,6 @@ int main()
 
         switch (input)
         {
-        case 0:
-            ret_value = END;
-            break;
         case 1:
             if (sumPolynome(p1, p2, &res))
             {
