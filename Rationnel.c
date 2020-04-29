@@ -62,31 +62,14 @@ void simplify(Rationnel *r)
 
 Rationnel sumRationnel(Rationnel r1, Rationnel r2)
 {
-    Rationnel r;
-    int a = r1.num;
-    int b = r1.den;
-    int c = r2.num;
-    int d = r2.den;
-
-    if (b != d)
-    {
-        a *= d;
-        c *= b;
-        b *= d;
-    }
-    r.num = a + c;
-    r.den = b;
-
+    Rationnel r = {r1.num * r2.den + r2.num * r1.den, r1.den * r2.den};
     simplify(&r);
     return r;
 }
 
 Rationnel productRationnel(Rationnel r1, Rationnel r2)
 {
-    Rationnel r;
-    r.num = r1.num * r2.num;
-    r.den = r1.den * r2.den;
-
+    Rationnel r = {r1.num * r2.num, r1.den * r2.den};
     simplify(&r);
     return r;
 }
