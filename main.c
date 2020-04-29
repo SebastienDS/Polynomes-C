@@ -161,15 +161,7 @@ int main()
             ret_value = FAIL_INPUT;
             break;
         }
-        if (input == 0)
-        {
-            break;
-        }
-        if (input < 0 || input > 7)
-        {
-            printf("action invalide\n");
-            continue;
-        }
+
         // Exemple de saisie de polynome degre 6: 1/1x^6+0/1x^5+0/1x^4+0/1x^3+0/1x^2+1/1x+1/1
         if (inputPolynome(&p1)) 
         {
@@ -187,6 +179,9 @@ int main()
 
         switch (input)
         {
+        case 0:
+            ret_value = END;
+            break;
         case 1:
             if (sumPolynome(p1, p2, &res))
             {
@@ -279,6 +274,7 @@ int main()
             printf("\n\n");
             break;
         default:
+            printf("Action invalide");
             break;
         }
         destroyPolynome(&p1);
