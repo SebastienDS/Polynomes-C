@@ -261,25 +261,34 @@ Rationnel integralPolynome(Polynome p, Rationnel a, Rationnel b)
 
 int elevationPowerN(Polynome p, int elevationDegre, Polynome *ret)
 {
-    if (elevationDegre <= 0)
-    {
-        return FAIL;
-    }
-
     Polynome passingPolynome;
-    if (_initPolynome(elevationDegre, &passingPolynome))
+    if (elevationDegre < 0)
     {
         return FAIL;
+    } else if (elevationDegre == 0) {
+        Rationnel poly[] = {(Rationnel){1, 1}};
+        if (initPolynome(0, poly, &passingPolynome))
+        {
+            return FAIL_MALLOC;
+        }
+        *ret = passingPolynome;
+        return OK;
     }
-    passingPolynome.poly[passingPolynome.degre] = (Rationnel){1, 1};
 
+    if (initPolynome(p.degre, p.poly, &passingPolynome)) {
+        return FAIL_MALLOC;
+    }
     int return_value = OK;
 
-    if (productPolynome(p, passingPolynome, ret))
+    for (int i = 1; i < elevationDegre; i++)
     {
-        return_value = FAIL;
+        if (productPolynome(p, passingPolynome, &passingPolynome))
+        {
+            return_value = FAIL;
+        }
     }
 
-    destroyPolynome(&passingPolynome);
+    *ret = passingPolynome;
+
     return return_value;
 }
