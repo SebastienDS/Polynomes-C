@@ -295,6 +295,7 @@ int main()
         if (nbrFree > 1) {
             destroyPolynome(&p2);
         }
+        nbrFree = 0;
     }
 
     return ret_value;
