@@ -5,7 +5,15 @@
 
 void printRationnelFrac(Rationnel r)
 {
-    printf("+(%d/%d)", r.num, r.den);
+    if (r.den == 1) {
+        if (r.num < 0) {
+            printf("%d", r.num);
+        } else {
+            printf("+%d", r.num);
+        }
+    } else {
+        printf("+(%d/%d)", r.num, r.den);
+    }
 }
 
 void printRationnel(Rationnel r)
