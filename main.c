@@ -142,7 +142,9 @@ int main()
     Polynome p1;
     Polynome p2;
     Polynome res;
-    
+
+    int nbrFree = 0;
+
     while (ret_value == OK)
     {
         printf("Que voulez vous faire: \n");
@@ -167,12 +169,18 @@ int main()
             ret_value = END;
             break;
         }
+        if (input > 7 || input < 0) {
+            printf("Action invalide\n");
+            continue;
+        }
+
         // Exemple de saisie de polynome degre 6: 1/1x^6+0/1x^5+0/1x^4+0/1x^3+0/1x^2+1/1x+1/1
         if (inputPolynome(&p1)) 
         {
             ret_value = FAIL;
             break;
         }
+        nbrFree++;
         if (input < 3)
         {
             if (inputPolynome(&p2)) 
@@ -180,6 +188,7 @@ int main()
                 ret_value = FAIL;
                 break;
             }
+            nbrFree++;
         }
 
         switch (input)
@@ -279,9 +288,13 @@ int main()
             printf("Action invalide");
             break;
         }
-        destroyPolynome(&p1);
-        destroyPolynome(&p2);
-        destroyPolynome(&res);
+        if (nbrFree > 0) {
+            destroyPolynome(&p1);
+            destroyPolynome(&res);
+        } 
+        if (nbrFree > 1) {
+            destroyPolynome(&p2);
+        }
     }
 
     return ret_value;
